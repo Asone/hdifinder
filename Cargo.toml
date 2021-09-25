@@ -6,11 +6,11 @@ authors = ["Nelson Herbin <nelson@herbin.info>"]
 edition = "2018"
 license = "MIT"
 readme = "README.md"
-repository = "https://github.com/Asone/b39wc"
-keywords = ["bitcoin", "BIP-39","BIP-0039","mnemonic"]
+repository = "https://github.com/Asone/hdifinder"
+keywords = ["bitcoin", "hdwallet","wallet","mnemonic"]
 categories = ["command-line-utilities"]
-homepage = "https://github.com/Asone/b39wc"
-documentation = "https://github.com/Asone/b39wc"
+homepage = "https://github.com/Asone/hdifinder"
+documentation = "https://github.com/Asone/hdifinder"
 
 [dependencies]
 clap = "2.33.3"
