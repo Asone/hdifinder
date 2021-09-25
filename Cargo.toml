@@ -1,0 +1,28 @@
+[package]
+name = "hdifinder
+description = "A key finder of Bitcoin HD wallets"
+version = "0.1.0"
+authors = ["Nelson Herbin <nelson@herbin.info>"]
+edition = "2018"
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/Asone/b39wc"
+keywords = ["bitcoin", "BIP-39","BIP-0039","mnemonic"]
+categories = ["command-line-utilities"]
+homepage = "https://github.com/Asone/b39wc"
+documentation = "https://github.com/Asone/b39wc"
+
+[dependencies]
+rand = "0.8.4"
+regex = "1"
+colour = "0.6.0"
+clap = "2.33.3"
+assert_cmd = "2.0.1"
+predicates = "2.0.2"
+hdpath = { version = "0.6.0", features = ["with-bitcoin"] }
+secp256k1 = "0.20.3"
+bitcoin = "0.27.0"
+bip39 = "1.0.1"
+num_cpus = "1.13.0"
+threadpool = "1.8.1"
+rayon = "1.5"
