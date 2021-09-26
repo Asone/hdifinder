@@ -1,4 +1,5 @@
 mod models;
+use assert_cmd::Command;
 use bip39::{Error, Mnemonic};
 use bitcoin::{
     network::constants::Network,
@@ -243,4 +244,16 @@ fn main() {
             exit(1);
         }
     }
+}
+
+#[test]
+fn test_successful_program_without_options() -> Result<(), Box<dyn std::error::Error>> {
+    let mnemonic_test: &str = "erupt quit sphere taxi air decade vote mixed life elevator mammal search empower rabbit barely indoor crush grid slide correct scatter deal tenant verb";
+    let address_test: &str = "15Wbvv7V9yWLCr3pxmPSFsAS3NSyQyqeA3";
+    let mut cmd = Command::cargo_bin("hdifinder")?;
+    cmd.arg(mnemonic_test);
+    cmd.arg(address_test);
+    cmd.assert().success();
+
+    Ok(())
 }
