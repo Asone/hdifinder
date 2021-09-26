@@ -6,6 +6,9 @@ jobs:
       - image: cimg/rust:1.55.0
     steps:
       - checkout
+      - run: 
+          name: Build
+          command: "cargo build"
       - run:
           name: Run Tests
           command: "cargo test"
