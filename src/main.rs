@@ -57,9 +57,9 @@ fn executor(
         let private_key = self::get_private_key(wallet_config.seed, &hd_path);
         let public_key = self::get_public_key(private_key);
         let addresses = self::address_compute(public_key);
-        '_inner: for addr in addresses {
+        '_inner: for addr in &addresses {
             if addr.1.as_str() == address {
-                return Some((i, addr.1, addr.0.to_string()));
+                return Some((i, addr.1.to_string(), addr.0.to_string()));
             }
         }
     }
