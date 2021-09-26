@@ -222,7 +222,6 @@ dependencies = [
  "bitcoin",
  "clap",
  "hdpath",
- "num_cpus",
  "predicates",
  "rayon",
  "secp256k1",
