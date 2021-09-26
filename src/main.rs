@@ -1,3 +1,4 @@
+mod models;
 use bip39::{Error, Mnemonic};
 use bitcoin::{
     network::constants::Network,
@@ -6,6 +7,7 @@ use bitcoin::{
 };
 use clap::{App, Arg, ArgMatches};
 use hdpath::{AccountHDPath, Purpose, StandardHDPath};
+use models::{SearchConfig, ExecutionConf, WalletConf };
 use rayon::prelude::*;
 use secp256k1::Secp256k1;
 use std::process::exit;
@@ -22,24 +24,6 @@ fn get_private_key(seed: [u8; 64], hd_path: &StandardHDPath) -> ExtendedPrivKey 
 fn get_public_key(private_key: ExtendedPrivKey) -> ExtendedPubKey {
     let secp = Secp256k1::new();
     ExtendedPubKey::from_private(&secp, &private_key)
-}
-
-struct WalletConf {
-    seed: [u8; 64],
-    account: AccountHDPath,
-}
-
-struct ExecutionConf {
-    start: usize,
-    end: usize,
-}
-
-struct SearchConfig {
-    start: usize,
-    end: usize,
-    chunksize: usize,
-    passphrase: String,
-    address: String,
 }
 
 fn address_compute(pubkey: ExtendedPubKey) -> [(&'static str, String); 3] {
@@ -110,7 +94,7 @@ fn load_config(args: &ArgMatches) -> SearchConfig {
         }
     }
 
-    let mut end: usize = 0;
+    let mut end: usize = 10000000;
     if args.is_present("end") {
         match args.value_of("end") {
             Some(r) => {
@@ -122,7 +106,7 @@ fn load_config(args: &ArgMatches) -> SearchConfig {
         }
     }
 
-    let mut chunksize: usize = 0;
+    let mut chunksize: usize = 2500;
     if args.is_present("chunksize") {
         match args.value_of("chunksize") {
             Some(r) => {
@@ -216,11 +200,6 @@ fn main() {
                 .index(2)
                 .help("The address to be found"),
         )
-        .after_help(
-            "Examples:\n
-            
-        ",
-        )
         .get_matches();
 
     let config: SearchConfig = self::load_config(&matches);
@@ -254,7 +233,6 @@ fn main() {
                             "address {} found at index {}. address type: {}",
                             result.1, result.0, result.2
                         );
-                        // std::io::stdout().lock().write_all(&result.0.to_string().into_bytes()).unwrap();
                         exit(0);
                     }
                     None => {}

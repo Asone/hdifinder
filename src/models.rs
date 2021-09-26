@@ -1,10 +1,19 @@
-pub struct WalletConf{
-    seed: [u8; 64],
-    account: AccountHDPath,
-    address: &'static str
+use hdpath::{AccountHDPath};
+
+pub struct WalletConf {
+    pub seed: [u8; 64],
+    pub account: AccountHDPath,
 }
 
-pub struct ExecutionConf{
-    start_index: usize,
-    chunk_size: usize
+pub struct ExecutionConf {
+    pub start: usize,
+    pub end: usize,
+}
+
+pub struct SearchConfig {
+    pub start: usize,
+    pub end: usize,
+    pub chunksize: usize,
+    pub passphrase: String,
+    pub address: String,
 }
