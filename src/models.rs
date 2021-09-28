@@ -5,6 +5,7 @@ pub struct WalletConf {
     pub account: AccountHDPath,
 }
 
+#[derive(Clone)]
 pub struct ExecutionConf {
     pub start: usize,
     pub end: usize,
